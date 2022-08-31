@@ -1,8 +1,33 @@
-// Modules - we link module using require(); directive
-// ./ - when files are in the same directory
-// and then we import it as function with some other name
-const things = require('./things');
-// and now we can use this function with other name and pass the parameters to other module on call
-console.log(things.arrayCounter([1, 7, 99, 8, 45, 8])); // В масиві знаходиться 6 элемента!
-console.log(things.multiply(2, 3)); // 2 умножить 3 равно 6
-console.log(things.someValue) // 451
+// imported built in modules
+const events = require('events');
+const util = require('util');
+
+const Cars = function functionName(model) {
+  this.model = model;
+};
+
+util.inherits(Cars, events.EventEmitter);
+
+const bmw = new Cars('BMW');
+const audi = new Cars('Audi');
+const volvo = new Cars('Volvo');
+
+const cars = [bmw, audi, volvo];
+cars.forEach(function(car) {
+  car.on('speed', function(text) {
+    console.log(car.model + " speed is - " + text);
+  })
+});
+
+bmw.emit('speed', '254.5 km');
+volvo.emit('speed', '180 km');
+// const things = require('./things');
+
+/*
+let myEmit = new events.EventEmmiter();
+
+myEmit.on('someEvent', function(text) {
+  console.log(text);
+});
+
+myEmit.emit('someEvent', 'Обробник подій спрацював!');*/
