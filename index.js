@@ -1,33 +1,24 @@
-// imported built in modules
-const events = require('events');
-const util = require('util');
 
-const Cars = function functionName(model) {
-  this.model = model;
-};
+// В Node JS существует модуль с названием fs (file system), отвечающий за работу с файлами. Благодаря модулю мы можем работать с файлами (создавать, удалять, записывать и считывать данные), директориями, а также с потоками данных. Про дополнительные возможности мы поговорим в следующих уроках, а в этом лишь затронем тему чтения и записи файлов как в синхронном, так и в асинхронном режиме.
+const fs = require('fs');
 
-util.inherits(Cars, events.EventEmitter);
+//це синхронні операції
+// синхронно (ім'я файла та кодування)
+/*const fileRead = fs.readFileSync('text.txt', 'utf-8');
+// код далі спрацює лише після того як метод прочитає весь файл
+console.log(fileRead); //Ура, ви мене прочитали!
+// створимо змінну
+let message = 'Gibbon\n' + fileRead;
+//запишемо тепер
+fs.writeFileSync('some-new-file.txt', message); // з'явиться новий файл, в який ми запишемо значення змінної*/
 
-const bmw = new Cars('BMW');
-const audi = new Cars('Audi');
-const volvo = new Cars('Volvo');
 
-const cars = [bmw, audi, volvo];
-cars.forEach(function(car) {
-  car.on('speed', function(text) {
-    console.log(car.model + " speed is - " + text);
-  })
+// це асинхронні операції.
+// 3й параметр - функція, яка спрацює, коли файл повність прочитаний
+fs.readFile('text.txt', 'utf-8', function(err, data) {
+  console.log(data); // спрацює другим
 });
+// текст 'Hi, it is me' буде застосований в data
+fs.writeFile('some.txt', 'Hi, it is me', function(err, data) {}); // Далі створиться файл з контентом
 
-bmw.emit('speed', '254.5 km');
-volvo.emit('speed', '180 km');
-// const things = require('./things');
-
-/*
-let myEmit = new events.EventEmmiter();
-
-myEmit.on('someEvent', function(text) {
-  console.log(text);
-});
-
-myEmit.emit('someEvent', 'Обробник подій спрацював!');*/
+console.log("Test"); // спрацює першим
