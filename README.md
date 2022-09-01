@@ -9,3 +9,13 @@ create folder index.js
 ```
 node index
 ```
+
+### Install express
+```
+yarn add express
+```
+
+### Clear terminal
+```
+ctrl + L
+```
