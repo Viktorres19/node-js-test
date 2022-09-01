@@ -1,18 +1,24 @@
 const express = require('express');
 // визиваємо експрес і присвоюємо його до змінної
 const app = express();
-// запит на сервер (гет і пост)
+
+app.set('view engine', 'ejs');
+
+// щоб відображати файли в браузері треба змінити метод send на sendFile
 app.get('/', function(req, res) {
-  // вказуємо любу строку, яку ми будемо виводити в браузер
-  res.send('This is home');
+  res.sendFile(__dirname + "/index.html");
 });
-// можемо додати іще одну сторінку
 app.get('/news', function(req, res) {
-  res.send('This is news');
+  res.sendFile(__dirname + "/contacts.html");
 });
-// щоб відслідковувати id статей, додамо через двокрапку id
+//тепер з параметрами які будуть мінятись
+/*app.get('/contacts/:id', function(req, res) {
+  res.send('ID is - ' + req.params.id);
+})*/
+//тепер використаємо шаблон
 app.get('/news/:id', function(req, res) {
-  res.send(`ID is - ${req.params.id}`); // http://127.0.0.1:3000/news/25 => ID is - 25
+  const obj = {title: "Новина", id: 4, paragraphs: ['Параграф', 'Звичайний текст', 'Числа: 2, 4, 5', 99]};
+  res.render('news', {newsId: req.params.id, newParam: 234, obj: obj});
 });
 // слухаємо порт
 app.listen(3000);
