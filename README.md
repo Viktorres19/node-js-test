@@ -19,3 +19,8 @@ yarn add express
 ```
 ctrl + L
 ```
+
+### Install template engine  ejs
+```
+yarn add ejs
+```
