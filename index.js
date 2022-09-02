@@ -31,6 +31,8 @@ app.get('/about', function(req, res) {
 //тепер використаємо шаблон
 app.get('/news/:id', function(req, res) {
   const obj = {title: "Новина", id: 4, paragraphs: ['Paragraph', 'Usual text', 'Numbers: 2, 4, 5', 99]};
+  // подивитись, що приходить після запиту
+  console.log(req.query); // { filter: 'id', city: 'kharkiv' }
   // шаблон news ejs
   res.render('news', {newsId: req.params.id, newParam: 234, obj: obj});
   // http://127.0.0.1:3000/news/%D0%BD%D0%BE%D0%B2%D0%BE%D1%81%D1%82%D1%8F
